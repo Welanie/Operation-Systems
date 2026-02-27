@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<body style="margin:0;height:100vh;overflow:hidden">
+
+<img id="i" src="image.jpg"
+     style="position:absolute;width:100px;left:0;top:0">
+
+<div style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%)">
+  <input id="s" type="number" value="0" style="width:60px">
+  <button onclick="g()">Старт</button>
+</div>
+
+<script>
+let t,dx,dy,i=document.getElementById("i");
+
+function g(){
+  clearInterval(t);
+  let v=+s.value||0;
+  dx=(Math.random()*2-1)*v; // изменение координат
+  dy=(Math.random()*2-1)*v;
+
+  t=setInterval(()=>{
+    i.style.left=i.offsetLeft+dx+"px"; //изменение положения картинки
+    i.style.top =i.offsetTop +dy+"px";
+
+    if(i.offsetLeft<=0||i.offsetLeft+i.width>=innerWidth)  dx*=-1; // отскок от границ
+    if(i.offsetTop <=0||i.offsetTop +i.height>=innerHeight)dy*=-1;
+  },20);
+}
+
+i.onmouseover=()=>clearInterval(t);
+</script>
+
+</body>
+</html>
